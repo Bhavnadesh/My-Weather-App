@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <ctime>
+#include<cstdlib>
+using namespace std;
+class weatherdata {
+public:
+	weatherdata() :temprature(0), humidity(0), weathercondition("") {}
+	void settemprature(double temp) {
+		temprature = temp;
+	}
+	void sethumidity(double hum) {
+		humidity = hum;
+	}
+	void setweathercondition(const string& conditions) {
+		weathercondition = conditions;
+	}
+	double gettemprature() const {
+		return temprature;
+	}
+	double gethumidity() const {
+		return humidity;
+	}
+	string getweatherconditions()const {
+		return weathercondition;
+	}
+private:
+	double temprature;
+	double humidity;
+	string weathercondition;
+};
+void generaterandomweatherdata(weatherdata& weather) {
+	double temp = rand() % 40 + 10;
+	double hum = rand() % 100;
+	string condition[] = { "Sunny", "Cloudy", "Rainy", "Snowy" };
+	//string condition[] = {[0]:"Sunny",[1]: "Cloudy",[2]: "Rainy",[3]: "Snowy"};
+	string weathercondition = condition[rand()%4];
+	weather.settemprature(temp);
+	weather.sethumidity(hum);
+	weather.setweathercondition(weathercondition);
+}
+int main() {
+	srand(time(0));
+	weatherdata todayforcast;
+	generaterandomweatherdata(todayforcast);
+	cout << "Weather Forcast for Today : " << endl;
+	cout << "Temprature :" << todayforcast.gettemprature() << "Celcius" << endl;
+	cout << "Humidity :" << todayforcast.gethumidity() << "%"<<endl;
+	cout << "Weather Conditions : " << todayforcast.getweatherconditions() << endl;
+}
+
